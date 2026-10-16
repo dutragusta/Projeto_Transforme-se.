@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"> <!-- link para os ícones -->
+    <link rel="stylesheet" href="style.css">
+    <title>Cadastro</title>
+</head>
+<body>
+    <main class="container">
+        <form>
+            <h1>Cadastro</h1>
+            <div class="input-box">
+                <input placeholder=" escolha um usuário" type="text" name="username" required>
+                <i class="bx bxs-user"></i>
+            </div>
+            <div class="input-box">
+                <input placeholder=" digite seu email" type="email" name="email" required>
+                <i class="bx bxs-user"></i>
+            </div>
+            <div class="input-box">
+                <input placeholder="escolha uma senha" type="password" name="password" required>
+                <i class="bx bxs-lock"></i>
+            </div>
+            <div class="input-box">
+                <input placeholder="confirme a senha" type="password" name="confirm_password" required>
+                <i class="bx bxs-lock"></i>
+            </div>
+
+            <div class="remember-forgot">
+                <label>
+                    <input type="checkbox">
+                    Concordo com os termos e condições
+                </label>
+            </div>
+
+            <button type="submit" class="cadastrar">Cadastrar</button>
+
+            <div class="login-link">
+                <p>Já tem uma conta? Faça <a href="../login/index.html">Login</a></p>
+            </div>
+        </form>
+
+    </main>
+</body>
+</html>
