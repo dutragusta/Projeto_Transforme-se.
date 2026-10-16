@@ -22,6 +22,7 @@ body {
 }
 
 .container {
+    user-select: none;
     width: 100%;
     max-width: 420px;
     background-color: transparent;
