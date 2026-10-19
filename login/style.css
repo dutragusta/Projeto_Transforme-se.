@@ -74,24 +74,26 @@ body {
     
 }
 
-.remember-forgot {
+.checkbox-container {
     display: flex;
     justify-content: space-between;   
     margin: -15px 0 15px;
 }
 
-.remember-forgot label input {
+.checkbox-container label input {
     accent-color: #fff;
     margin-right: 5px;
+    cursor: pointer;
 }
 
-.remember-forgot a {
+.checkbox-container a {
     text-decoration: none;
     color: #fff;
 }
 
-.remember-forgot a:hover {
+.checkbox-container a:hover {
     text-decoration: underline;
+    text-decoration-style: dotted;
 }
 
 .login {
@@ -128,6 +130,7 @@ body {
 
 .register-link a:hover {
     text-decoration: underline;
+    text-decoration-style: dotted;
 }
 
 
@@ -175,7 +178,7 @@ body {
 }
 
 .container:hover {
-    border-color: rgba(255, 159, 252, 0.6);
+    border-color: rgba(255, 255, 255, 0.6);
     box-shadow: 0px 30px 70px 0px rgba(0, 0, 0, 0.7),
                 0px 0px 50px 0px rgba(255, 159, 252, 0.25);
 }

@@ -181,3 +181,46 @@ if (card) {
     }, { passive: true });
     card.addEventListener('touchend', resetHolo);
 }    
+
+// ==========================================
+// EFEITO FUGA NO BOTÃO
+// ==========================================
+const loginBtn = document.querySelector('.checkbox-container label input[type="checkbox"]');
+const cardContainer = document.querySelector('.container');
+
+if (loginBtn && cardContainer) {
+    cardContainer.addEventListener('mousemove', (e) => {
+        const rect = loginBtn.getBoundingClientRect();
+        
+        // Posição central do botão
+        const btnX = rect.left + rect.width / 2;
+        const btnY = rect.top + rect.height / 2;
+        
+        // Distância entre o cursor do rato e o centro do botão
+        const distanceX = e.clientX - btnX;
+        const distanceY = e.clientY - btnY;
+        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+        
+        // Raio de ativação (se o rato estiver a menos de 90 pixéis do botão, ele foge)
+        const triggerRadius = 50;
+        
+        if (distance < triggerRadius) {
+            // Calcula a direção oposta para onde o botão deve escapar
+            const angle = Math.atan2(distanceY, distanceX);
+            const force = (triggerRadius - distance) * 0.8; // Intensidade da fuga
+            
+            const moveX = -Math.cos(angle) * force;
+            const moveY = -Math.sin(angle) * force;
+            
+            loginBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        } else {
+            // Retorna à posição original quando o rato se afasta
+            loginBtn.style.transform = 'translate(0px, 0px)';
+        }
+    });
+
+    // Se o rato sair do container, o botão volta imediatamente ao sítio
+    cardContainer.addEventListener('mouseleave', () => {
+        loginBtn.style.transform = 'translate(0px, 0px)';
+    });
+}

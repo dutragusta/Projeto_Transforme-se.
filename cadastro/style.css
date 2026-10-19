@@ -12,20 +12,29 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url(img/codes.jpg) ;
+    background-color: #080510;
+    overflow: hidden;
+    perspective: 1000px;
+    padding: 20px;
+    /*background: url(img/codes.jpg); Desativado para usar o efeito de fundo ASCII
     background-size: cover;
-    background-position: center;
+    background-position: center;*/
 }
 
 .container {
-    width: 420px;
+    user-select: none; /* Evita que o usuário selecione o texto do formulário ao clicar e arrastar */
+    -webkit-user-select: none; /* Para navegadores baseados em WebKit */
+    -moz-user-select: none; /* Para navegadores baseados em Gecko */
+    -ms-user-select: none; /* Para navegadores baseados em Trident/EdgeHTML */
+    width: 100%;
+    max-width: 420px;
     background-color: transparent;
     border: 2px solid rgba(255, 255, 255, .2);
-    border-radius: 10px;
+    border-radius: 50px;
     color: #fff;
     padding: 30px 40px;
-    box-shadow: -18px 30px 65px 0px rgb(72, 52, 3);
-    backdrop-filter: blur(10px);
+    box-shadow: -18px 30px 65px 0px rgba(255, 255, 255, 0.189);
+    backdrop-filter: blur(4px);
 }
 
 .container h1 {
@@ -44,7 +53,7 @@ body {
     width: 100%;
     height: 100%;
     background: transparent;
-    border: 2px solid rgba(255, 255, 255, .5);
+    border: 2px solid rgba(255, 255, 255, 0.995);
     border-radius: 40px;
     outline: none;
     font-size: 16px;
@@ -53,7 +62,7 @@ body {
 }
 
 .input-box input::placeholder {
-    color: #fff;
+    color: #ffffff5b;
 }
 
 .input-box i {
@@ -65,26 +74,26 @@ body {
     
 }
 
-.remember-forgot {
+.checkbox-container {
     display: flex;
     justify-content: space-between;   
     margin: -15px 0 15px;
 }
 
-.remember-forgot label input {
+.checkbox-container label input {
     accent-color: #fff;
     margin-right: 5px;
+    cursor: pointer;
 }
 
-.remember-forgot a {
+.checkbox-container a {
     text-decoration: none;
     color: #fff;
 }
 
-.remember-forgot a:hover {
+.checkbox-container a:hover {
     text-decoration: underline;
-    font-size: 11px;
-    transition: 0.3s;
+    text-decoration-style: dotted;
 }
 
 .cadastrar {
@@ -104,7 +113,7 @@ body {
     background-color: transparent;
     border: 2px solid rgba(255, 255, 255, .5);
     color: #fff;
-    transition: 0.6s;
+    transition: 0.5s;
 }
 
 .login-link {
@@ -121,10 +130,144 @@ body {
 
 .login-link a:hover {
     text-decoration: underline;
+    text-decoration-style: dotted;
 }
 
-.remember-forgot {
-    font-size: 13px;
-    margin: 15px 0px 15px 0px;
-    text-height: 1222px;
+
+/* ==========================================
+   FUNDO COM EFEITO ASCII
+   ========================================== */
+#ascii-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Joga o efeito para trás do formulário de login */
+    pointer-events: none; /* Garante que você consiga clicar nos inputs normalmente */
+}
+
+/* ==========================================
+   CONTAINER COM EFEITO HOLO CARD 3D
+   ========================================== */
+.container {
+    /* Variáveis controladas pelo JavaScript */
+    --rx: 0deg;
+    --ry: 0deg;
+    --px: 50%;
+    --py: 50%;
+    --holo-opacity: 0;
+
+    position: relative;
+    width: 420px;
+    background-color: rgba(15, 10, 30, 0.45);
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50px;
+    color: #fff;
+    padding: 30px 40px;
+    box-shadow: 0px 25px 65px 0px rgba(0, 0, 0, 0.6), 
+                0px 0px 40px 0px rgba(82, 39, 255, 0.2);
+    backdrop-filter: blur(8px);
+    overflow: hidden; /* Corta o brilho holográfico exatamente na borda arredondada de 50px */
+
+    /* Aplica a inclinação 3D */
+    transform: rotateX(var(--rx)) rotateY(var(--ry));
+    transform-style: preserve-3d;
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+    will-change: transform;
+}
+
+.container:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0px 30px 70px 0px rgba(0, 0, 0, 0.7),
+                0px 0px 50px 0px rgba(255, 159, 252, 0.25);
+}
+
+/* CAMADA 1: Película Holográfica (Arco-íris / Furta-cor que se move com o mouse) */
+.container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: 
+        linear-gradient(
+            115deg,
+            transparent 15%,
+            rgba(255, 0, 128, 0.35) 30%,
+            rgba(255, 230, 0, 0.35) 42%,
+            rgba(0, 255, 180, 0.35) 50%,
+            rgba(0, 180, 255, 0.35) 58%,
+            rgba(140, 0, 255, 0.35) 70%,
+            transparent 85%
+        );
+    background-size: 250% 250%;
+    background-position: var(--px) var(--py);
+    mix-blend-mode: color-dodge; /* Mistura as cores como um reflexo metálico real */
+    opacity: var(--holo-opacity);
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* Não atrapalha o clique nos inputs */
+    z-index: 0;
+}
+
+/* CAMADA 2: Feixe de Luz (Glare) + Textura de Glitter Pontilhado */
+.container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-image: 
+        /* Luz branca que segue a ponta do mouse */
+        radial-gradient(
+            circle at var(--px) var(--py),
+            rgba(255, 255, 255, 0.35) 0%,
+            rgba(255, 255, 255, 0.1) 30%,
+            transparent 65%
+        ),
+        /* Micro-pontinhos de glitter que brilham quando a luz passa */
+        radial-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px),
+        radial-gradient(rgba(255, 159, 252, 0.25) 1px, transparent 1px);
+    background-size: 100% 100%, 14px 14px, 20px 20px;
+    background-position: 0 0, 0 0, 7px 7px;
+    mix-blend-mode: overlay;
+    opacity: var(--holo-opacity);
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Garante que o formulário fique em cima do brilho e nítido */
+.container form {
+    position: relative;
+    z-index: 1;
+}
+
+/* ==========================================
+   ESTILOS DO FORMULÁRIO
+   ========================================== */
+.container h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.995);
+    border-radius: 40px;
+    outline: none;
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 20px;
+}
+
+.input-box input::placeholder {
+    color: #ffffff5b;
 }
